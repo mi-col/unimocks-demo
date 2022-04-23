@@ -134,7 +134,7 @@ You can read up more about both `Faker` and `factory.ts`, but here is a short su
 const user = UserFactory.build({ age: 70 });
 ```
 
-`each` is a `faker.ts` method that allows us to generate non-static data. It could be bound to the index of the object being generated, but since we are lazy and just want random data, we delegate that to `Faker`.
+`each` is a `factory.ts` method that allows us to generate non-static data. It could be bound to the index of the object being generated, but since we are lazy and just want random data, we delegate that to `Faker`.
 
 Now that we have a way to easily generate fake data, we can use it in our unit test:
 
@@ -203,9 +203,7 @@ So now let's move our mocks to a separate file and mark the code for deletion, t
 import { mocks } from  "./users.mocks";
 --------------------------------------
 {
-
-/*dev:start*/  mocks, /*dev:end*/
-
+  /*dev:start*/  mocks, /*dev:end*/
 }
 ```
 
@@ -267,13 +265,9 @@ process.env.JEST_PUPPETEER_CONFIG = require.resolve("./puppeteer.config.js");
 
 module.exports = {
   preset: "jest-puppeteer",
-
   setupFilesAfterEnv: ["@testing-library/jest-dom", "expect-puppeteer"],
-
   testTimeout: 60000,
-
   transform: tsJest.transform,
-
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
 };
 ```
@@ -284,7 +278,6 @@ As you've probably noticed from the jest config, the next step is to configure p
 const config = {
   launch: {
     timeout: 30000,
-
     dumpio: true,
   },
 };
@@ -294,13 +287,9 @@ const isDebugMode = process.argv.includes("--debug");
 if (isDebugMode) {
   config.launch = {
     ...config.launch,
-
     headless: false,
-
     slowMo: 10,
-
     devtools: true,
-
     args: ["--start-maximized"],
   };
 }
@@ -315,27 +304,20 @@ var baseConfig = require("./jest.config");
 
 module.exports = {
   ...baseConfig,
-
   globalSetup: "./devserver.setup.js",
-
   globalTeardown: "./devserver.teardown.js",
 };
 
 // devserver.setup.js
 const { setup: setupDevServer } = require("jest-dev-server");
-
 const { setup: setupPuppeteer } = require("jest-environment-puppeteer");
 
 module.exports = async (globalConfig) => {
   await setupPuppeteer(globalConfig);
-
   await setupDevServer({
     command: "npm run start",
-
     launchTimeout: 60000,
-
     debug: true,
-
     port: 3000,
   });
 };
@@ -347,7 +329,6 @@ const { teardown: teardownPuppeteer } = require("jest-environment-puppeteer");
 
 module.exports = async (globalConfig) => {
   await teardownDevServer(globalConfig);
-
   await teardownPuppeteer();
 };
 ```
@@ -367,7 +348,7 @@ First, let's go to our api object and add a new option:
 
 ```typescript
   {
-    mocks,
+    /*dev:start*/  mocks, /*dev:end*/,
     integrationMocks: !!process.env.REACT_APP_INTEGRATION
   }
 ```
@@ -580,4 +561,4 @@ Though the setup for all of this may seem a bit much, once your project starts g
 
 [^1]: Disclosure: I am the author of Unimocks, so this guide is partially a demo of how to use it.
 
-[^2]: I'm also the author of Pompeteer, so this was a shameless shill.
+[^2]: I'm also the author of Pompeteer, so this was a shameless plug.
