@@ -65,7 +65,7 @@
     "jest-dev-server": "^6.0.3",
     "jest-pact": "^0.9.3",
     "jest-puppeteer": "^6.1.0",
-    "pompeteer": "^0.0.6",
+    "pompeteer": "^0.0.9",
     "puppeteer": "^13.5.2",
     "rewire": "^6.0.0",
     "ts-jest": "^27.1.4",

@@ -21,17 +21,17 @@ export class UserInput extends PompElement {
   createButton = this.$('button');
 
   createUser = async (user: Partial<User>) => {
-    await (await this.firstName.fetch()).click();
+    await (await this.firstName.locator()).click();
     await page.keyboard.type(user.firstName || '');
-    await (await this.lastName.fetch()).click();
+    await (await this.lastName.locator()).click();
     await page.keyboard.type(user.lastName || '');
-    await (await this.job.fetch()).click();
+    await (await this.job.locator()).click();
     await page.keyboard.type(user.job || '');
-    await (await this.email.fetch()).click();
+    await (await this.email.locator()).click();
     await page.keyboard.type(user.email || '');
-    await (await this.age.fetch()).click();
+    await (await this.age.locator()).click();
     await page.keyboard.type(user.age?.toString() || '');
-    await (await this.createButton.fetch()).click();
+    await (await this.createButton.locator()).click();
   }
 }
 
@@ -43,12 +43,12 @@ export class UserBox extends PompElement {
   deleteButton = this.$('button');
 
   getUser = async (): Promise<Partial<User>> => {
-    const name = await this.name.text;
+    const name = await this.name.text();
     const firstName = name.split(' ')[0];
     const lastName = name.split(' ')[1];
-    const job = await this.job.text;
-    const email = await this.email.text;
-    const age = +(await this.age.text);
+    const job = await this.job.text();
+    const email = await this.email.text();
+    const age = +(await this.age.text());
     return {
       firstName,
       lastName,

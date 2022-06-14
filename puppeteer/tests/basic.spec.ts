@@ -17,7 +17,7 @@ describe('App', () => {
     const user = UserFactory.build({id: undefined});
     await main.userInput.createUser(user);
     await page.waitForNetworkIdle();
-    const users = await main.users.fetch();
+    const users = await main.users.locator();
     expect(await users[users.length - 1].getUser()).toEqual({...user, id: undefined});
   });
 })
