@@ -18,5 +18,6 @@ export const usersAPI = new APIService<UsersAPI>(
       getUsers: () => UserFactory.buildList(10),
     },
     /*dev:end*/
+    integrationMocks: !!process.env.REACT_APP_INTEGRATION,
   }
 );
