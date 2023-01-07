@@ -7,7 +7,32 @@ export class MainPage extends PompPage {
     return this;
   }
 
+  userInput = this.$('.user-input', UserInput);
+
   users = this.$$('.user', UserBox);
+}
+
+export class UserInput extends PompElement {
+  firstName = this.$('input[name=firstName]');
+  lastName = this.$('input[name=lastName]');
+  job = this.$('input[name=job]');
+  email = this.$('input[name=email]');
+  age = this.$('input[name=age]');
+  createButton = this.$('button');
+
+  createUser = async (user: Partial<User>) => {
+    await (await this.firstName.locator()).click();
+    await page.keyboard.type(user.firstName || '');
+    await (await this.lastName.locator()).click();
+    await page.keyboard.type(user.lastName || '');
+    await (await this.job.locator()).click();
+    await page.keyboard.type(user.job || '');
+    await (await this.email.locator()).click();
+    await page.keyboard.type(user.email || '');
+    await (await this.age.locator()).click();
+    await page.keyboard.type(user.age?.toString() || '');
+    await (await this.createButton.locator()).click();
+  }
 }
 
 export class UserBox extends PompElement {
