@@ -23,7 +23,7 @@ export const usersAPI = (baseURL = defaultBaseURL) =>
     {
       getUsers: axiosRequest({ baseURL, method: 'GET', path: `/users`}),
       addUser: axiosRequest({ baseURL, method: 'POST', path: `/users`, body: (input) => input}),
-      updateUser: axiosRequest({ baseURL, method: 'PATCH', path: ({id}) => `/users/${id}`, body: weedOutFields(['id'])}),
+      updateUser: axiosRequest({ baseURL, method: 'PATCH', path: ({id}) => `/users/${id}`, body: ({user}) => weedOutFields(['id'])(user)}),
       deleteUser: axiosRequest({ baseURL, method: 'DELETE', path: (id) => `/users/${id}` }),
     },
     {
